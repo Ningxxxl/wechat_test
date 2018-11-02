@@ -1,0 +1,14 @@
+# ===============================
+# = HTTP/HTTPS
+# ===============================
+server:
+  port: 8082
+  servlet:
+    context-path: /wechat
+
+# ===============================
+# = SPRING CONFIG
+# ===============================
+spring:
+  profiles:
+    active: dev
