@@ -1,13 +1,10 @@
 package cn.ningxy.wechat_test;
 
-import cn.ningxy.wechat_test.util.SHA1Util;
+import cn.ningxy.wechat_test.entity.ResultBody;
 import cn.ningxy.wechat_test.util.WeChatUtil;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * @author ningxy
@@ -25,12 +22,17 @@ public class Controller {
      * @param echostr   随机字符串
      * @return 确认此次GET请求来自微信服务器，原样返回echostr参数内容
      */
-    @GetMapping("/check")
+    @RequestMapping(value = "/check", method = RequestMethod.GET)
     public String test(String signature, String timestamp, String nonce, String echostr) {
         if (WeChatUtil.check(signature, timestamp, nonce)) {
             return echostr;
         } else {
             return null;
         }
+    }
+
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public ResultBody result() {
+        return ResultBody.generateSuccessResult("跳转页");
     }
 }
